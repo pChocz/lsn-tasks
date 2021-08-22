@@ -12,13 +12,13 @@ public class Graph {
   }
 
   public void addNodesPair(final int node1Id, final int node2Id) {
-    final Node node1 = this.findNodeById(node1Id);
-    final Node node2 = this.findNodeById(node2Id);
+    final Node node1 = this.findNodeByIdOrCreateNew(node1Id);
+    final Node node2 = this.findNodeByIdOrCreateNew(node2Id);
     this.neighborsMap.put(node1, node2);
     this.neighborsMap.put(node2, node1);
   }
 
-  private Node findNodeById(final int id) {
+  private Node findNodeByIdOrCreateNew(final int id) {
     return this.neighborsMap
         .keySet()
         .stream()
