@@ -27,13 +27,14 @@ public class Graph {
         .orElse(new Node(id));
   }
 
-  void dfsRecursive(final Node node) {
-    node.setVisited();
-    for (final Node neighbor : this.neighborsMap.get(node)) {
-      if (!neighbor.isVisited()) {
-        dfsRecursive(neighbor);
-      }
+  int countDividedNetworks() {
+    int count = 0;
+    while (hasUnvisitedNodes()) {
+      count++;
+      final Node firstUnvisitedNode = getFirstUnvisitedNode();
+      dfsRecursive(firstUnvisitedNode);
     }
+    return count;
   }
 
   boolean hasUnvisitedNodes() {
@@ -52,14 +53,13 @@ public class Graph {
         .orElse(null);
   }
 
-  int countDividedNetworks() {
-    int count = 0;
-    while (hasUnvisitedNodes()) {
-      count++;
-      final Node firstUnvisitedNode = getFirstUnvisitedNode();
-      dfsRecursive(firstUnvisitedNode);
+  void dfsRecursive(final Node node) {
+    node.setVisited();
+    for (final Node neighbor : this.neighborsMap.get(node)) {
+      if (!neighbor.isVisited()) {
+        dfsRecursive(neighbor);
+      }
     }
-    return count;
   }
-}
 
+}
