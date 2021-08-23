@@ -31,7 +31,7 @@ final class Task2 {
       final int occurence1 = entry.getValue();
       final Integer occurence2 = map.get(SUM - number);
       if (occurence2 != null) {
-        final int occurence = Math.max(occurence1, occurence2);
+        final int occurence = calculateNumberOfPairs(number, occurence1, occurence2);
         for (int i = 0; i < occurence; i++) {
           sb.append(number + " " + (SUM - number) + "\n");
         }
@@ -41,6 +41,16 @@ final class Task2 {
       }
     }
     return sb.toString();
+  }
+
+  /**
+   * Special handling is required for cases when SUM is even and number that we check is exactly half of the sum.
+   * In this case it's required to count combinations instead of permutations.
+   */
+  private static int calculateNumberOfPairs(final int number, final int occurence1, final Integer occurence2) {
+    return SUM % 2 == 0 && SUM / 2 == number
+        ? occurence1 * (occurence1 - 1) / 2
+        : occurence1 * occurence2;
   }
 
   private static Map<Integer, Integer> buildOccurencesMap(final Collection<Integer> numbers) {

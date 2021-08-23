@@ -1,10 +1,8 @@
 package task3;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode
 class Node implements Comparable<Node> {
 
   private final int id;
